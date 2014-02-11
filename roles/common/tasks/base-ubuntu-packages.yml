@@ -1,0 +1,28 @@
+- name: Update Ubuntu base packages
+
+  apt: update_cache=yes cache_valid_time=3600
+- name: Upgrade dist
+  sudo: yes
+  apt: upgrade=dist
+- name:  Install core packages we want to use
+  apt: pkg={item} present=yes
+  with_items:
+    - screen
+    - curl
+    - wget
+    - vim
+    - nano
+    - netcat
+    - tree
+    - python-software-properties
+    - software-properties-common
+    - openssl
+    - openssl-blacklist
+    - openssl-blacklist-extra
+    - unzip present
+    - bash-completion
+    - bzip2
+    - awk
+    - acl
+
+

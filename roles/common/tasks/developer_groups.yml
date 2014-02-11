@@ -1,0 +1,2 @@
+- name: Add the developers group
+  group: name=somegroup state=present gid=666

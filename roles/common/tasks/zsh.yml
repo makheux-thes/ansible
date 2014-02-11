@@ -1,0 +1,6 @@
+- name:     Install zsh as base shell
+  sudo:     yes
+  apt:      pkg=zsh present=yes
+  shell:    chsh -s $(which zsh)
+- name:     Set oh-my-zsh as base for zsh
+  shell:    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh

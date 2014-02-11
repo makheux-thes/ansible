@@ -1,0 +1,13 @@
+- name:         Create a temporary directory
+  shell:        cd $(mktemp -d)
+- name:         Fetch the deb package
+  shell:        curl https://s3-eu-west-1.amazonaws.com/shrikeh.net/packages/duo-unix_1.9.7-1_amd64.deb
+- name:         Install the debian package
+  shell:        dpkg -i duo-unix_1.9.7-1_amd64.deb
+  sudo:         yes
+- name:         Setup duosec SSH config file
+  sudo:         yes
+  template:     src=templates/login_duo.conf.j2 dest=/etc/duo/login_duo.conf owner=sshd group=root mode=0400
+- name:         Add duosec to ssh config
+  sudo:         yes
+  lineinfile:   dest=/etc/ssh/sshd_config state=present insertafter=EOF line="ForceCommand /usr/sbin/login_duo"

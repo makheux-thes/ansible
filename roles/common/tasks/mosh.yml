@@ -1,0 +1,22 @@
+- name:     Add duo security (https://duosecurity.com)
+  sudo:     yes
+  apt:      pkg={item} present=yes
+  with_items:
+    - libssl-dev
+    - libpam-dev
+    - checkinstall
+- name:     cd into home directory
+  shell:    export
+- name:     Download the latest version of duosecurity
+  shell:    wget https://dl.duosecurity.com/duo_unix-latest.tar.gz
+
+- name:     Untar the package
+  shell:    tar xvf ~/duo_unix-latest.tar.gz
+- name:     Change into the new directory
+  shell:    cd ~/duo_unix-1.9.7
+- name:     Configure the package ready to install
+  shell:    ./configure --with-pam --prefix=/usr && make
+- name:     Install using checkinstall
+  sudo:     yes
+  shell:    checkinstall
+
