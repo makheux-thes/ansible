@@ -19,7 +19,7 @@
     - openssl
     - openssl-blacklist
     - openssl-blacklist-extra
-    - unzip present
+    - unzip
     - bash-completion
     - bzip2
     - awk
